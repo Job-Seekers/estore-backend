@@ -30,5 +30,5 @@ app.listen(port,()=>{
 })
 
 app.get('/', function (req, res) {
-    res.send(JSON.stringify({ Hello: world}));
+    res.send("Hello World");
    });
