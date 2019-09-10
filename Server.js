@@ -13,10 +13,6 @@ app.use(express.json());
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true});
 const connection = mongoose.connection;
-connection.once('open',()=>{
-
-    console.log("MongoDB connected successfully")
-})
 
 const usersRouter = require('./routes/users');
 const productRouter = require('./routes/products');
@@ -31,4 +27,9 @@ app.listen(port,()=>{
 
 app.get('/', function (req, res) {
     res.send("Hello World");
+    connection.once('open',()=>{
+
+        console.log("MongoDB connected successfully")
+    })
+    
    });
