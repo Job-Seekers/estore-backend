@@ -10,9 +10,17 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true});
-const connection = mongoose.connection;
+
+const db = require('./config/keys').mongoURI;
+mongoose
+  .connect(db)
+  .then(() => {
+    console.log('MongoDB Connected');
+  })
+  .catch(err => {
+    console.log(err);
+    console.log(' MongoDB Not Connected');
+  });
 
 const usersRouter = require('./routes/users');
 const productRouter = require('./routes/products');
@@ -29,10 +37,7 @@ app.listen(port,()=>{
 })
 
 app.get('/', function (req, res) {
-    connection.once('open',()=>{
-
-        console.log("MongoDB connected successfully")
-    })
+   
     res.send("Hello World");
 
    });
