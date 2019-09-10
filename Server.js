@@ -22,14 +22,16 @@ app.use('/users',usersRouter);
 
 
 app.listen(port,()=>{
-    console.log(`Server is running on port: ${port}`);
-})
-
-app.get('/', function (req, res) {
-    res.send("Hello World");
     connection.once('open',()=>{
 
         console.log("MongoDB connected successfully")
     })
     
+    console.log(`Server is running on port: ${port}`);
+    
+})
+
+app.get('/', function (req, res) {
+    res.send("Hello World");
+
    });
