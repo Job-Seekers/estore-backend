@@ -51,10 +51,11 @@ router.route('/add').post((req,res) => {
 
 });
 
-router.route('delete/:id').get((req,res)=>{
-    console.log(req.params.id);
-    Product.findOneAndDelete({"_id":req.params.id})
-    .then(Product => res.json(Product))
+router.route('/delete/:id').get((req,res)=>{
+    
+    Product.findOneAndRemove({"_id":req.params.id})
+    .exec()
+    .then(Products => res.json(Products))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 module.exports = router;
